@@ -1,13 +1,8 @@
-import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:zoomeye/examples/cloudanchorexample.dart';
-import 'package:zoomeye/examples/debugoptionsexample.dart';
-import 'package:zoomeye/examples/externalmodelmangementexample.dart';
-import 'package:zoomeye/examples/localandwebobjectsexample.dart';
-import 'package:zoomeye/examples/objectgestureexample.dart';
-import 'package:zoomeye/examples/objectsonplanesexample.dart';
-import 'package:zoomeye/examples/screenshotexample.dart';
+import 'package:zoomeye/examples/hello.dart';
 
 void main() {
   // runApp(const MyApp());
@@ -36,7 +31,7 @@ class _AppState extends State<App> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await ArFlutterPlugin.platformVersion;
+      platformVersion = Platform.version;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -79,43 +74,7 @@ class ExampleList extends StatelessWidget {
           'Debug Options',
           'Visualize feature points, planes and world coordinate system',
           () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const DebugOptionsWidget()))),
-      Example(
-          'Local & Online Objects',
-          'Place 3D objects from Flutter assets and the web into the scene',
-          () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const LocalAndWebObjectsWidget()))),
-      Example(
-          'Anchors & Objects on Planes',
-          'Place 3D objects on detected planes using anchors',
-          () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ObjectsOnPlanesWidget()))),
-      Example(
-          'Object Transformation Gestures',
-          'Rotate and Pan Objects',
-          () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ObjectGesturesWidget()))),
-      Example(
-          'Screenshots',
-          'Place 3D objects on planes and take screenshots',
-          () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ScreenshotWidget()))),
-      Example(
-          'Cloud Anchors',
-          'Place and retrieve 3D objects using the Google Cloud Anchor API',
-          () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CloudAnchorWidget()))),
-      Example(
-          'External Model Management',
-          'Similar to Cloud Anchors example, but uses external database to choose from available 3D models',
-          () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ExternalModelManagementWidget())))
+              MaterialPageRoute(builder: (context) => HelloWidget())))
     ];
     return ListView(
       children:
