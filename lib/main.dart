@@ -1,8 +1,33 @@
 import 'dart:io';
 
+import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:zoomeye/examples/body_tracking.dart';
+import 'package:zoomeye/examples/camera_position.dart';
+import 'package:zoomeye/examples/custom_animation.dart';
+import 'package:zoomeye/examples/custom_light.dart';
+import 'package:zoomeye/examples/custom_object_page.dart';
+import 'package:zoomeye/examples/distance_tracking_page.dart';
+import 'package:zoomeye/examples/earth_page.dart';
+import 'package:zoomeye/examples/face_detection_page.dart';
 import 'package:zoomeye/examples/hello.dart';
+import 'package:zoomeye/examples/image_detection_page.dart';
+import 'package:zoomeye/examples/light_estimate_page.dart';
+import 'package:zoomeye/examples/manipulation_page.dart';
+import 'package:zoomeye/examples/measure_page.dart';
+import 'package:zoomeye/examples/midas_page.dart';
+import 'package:zoomeye/examples/network_image_detection.dart';
+import 'package:zoomeye/examples/occlusion_page.dart';
+import 'package:zoomeye/examples/panorama_page.dart';
+import 'package:zoomeye/examples/physics_page.dart';
+import 'package:zoomeye/examples/plane_detection_page.dart';
+import 'package:zoomeye/examples/real_time_updates.dart';
+import 'package:zoomeye/examples/snapshot_scene.dart';
+import 'package:zoomeye/examples/tap_page.dart';
+import 'package:zoomeye/examples/video_page.dart';
+import 'package:zoomeye/examples/widget_projection.dart';
+import 'package:zoomeye/examples/world.dart';
 
 void main() {
   // runApp(const MyApp());
@@ -71,10 +96,135 @@ class ExampleList extends StatelessWidget {
   Widget build(BuildContext context) {
     final examples = [
       Example(
-          'Debug Options',
-          'Visualize feature points, planes and world coordinate system',
+          'Hello',
+          'Visualize Ball',
           () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => HelloWidget())))
+              MaterialPageRoute(builder: (context) => HelloWidget()))),
+      Example(
+          'Hello World',
+          'Visualize basich shapes',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HelloWorldPage()))),
+      Example(
+          'Check support',
+          'Check the device is support AR or Not',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HelloWorldPage()))),
+      Example(
+          'Camera Position',
+          'Live Carmera Position',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CameraPositionScenePage()))),
+      Example(
+          'Custom Animation',
+          'Animation',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CustomAnimationPage()))),
+      Example(
+          'Custom Light',
+          'Light',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CustomLightPage()))),
+      Example(
+          'Custom Object',
+          'Object',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CustomObjectPage()))),
+      Example(
+          'Distance Tracking',
+          'Distance',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DistanceTrackingPage()))),
+      Example(
+          'Earth',
+          'Earth',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => EarthPage()))),
+      Example(
+          'Face',
+          'Face Detection',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => FaceDetectionPage()))),
+      Example(
+          'Image',
+          'Image Detection',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ImageDetectionPage()))),
+      Example(
+          'Light',
+          'Light Estimate',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LightEstimatePage()))),
+      Example(
+          'Manipulation',
+          'Manipulation Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ManipulationPage()))),
+      Example(
+          'Measure',
+          'Measure Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MeasurePage()))),
+      Example(
+          'Media',
+          'Media Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MidasPage()))),
+      Example(
+          'Network',
+          'Network Image Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => NetworkImageDetectionPage()))),
+      Example(
+          'Occlusion',
+          'Occlusion Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => OcclusionPage()))),
+      Example(
+          'Panorama',
+          'Panorama Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PanoramaPage()))),
+      Example(
+          'Physiscs',
+          'Physiscs Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PhysicsPage()))),
+      Example(
+          'Plane Detection',
+          'Plane Detection Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PlaneDetectionPage()))),
+      Example(
+          'Real Time Updates',
+          'Real Time Updates Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => RealTimeUpdatesPage()))),
+      Example(
+          'Snapshot scene',
+          'Snapshot scene Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SnapshotScenePage()))),
+      Example(
+          'Tap ',
+          'Tap Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => TapPage()))),
+      Example(
+          'Video ',
+          'Video Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => VideoPage()))),
+      Example(
+          'Widget ',
+          'Widget Projection Page',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => WidgetProjectionPage()))),
+      Example(
+          'Body Tracking',
+          'Visualize Body Tracking',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BodyTrackingPage())))
     ];
     return ListView(
       children:
