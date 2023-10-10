@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:zoomeye/examples/body_tracking.dart';
 import 'package:zoomeye/examples/camera_position.dart';
 import 'package:zoomeye/examples/custom_animation.dart';
 import 'package:zoomeye/examples/custom_light.dart';
 import 'package:zoomeye/examples/custom_object_page.dart';
+import 'package:zoomeye/examples/detector/object_detector.dart';
+import 'package:zoomeye/examples/detector/text_detector.dart';
 import 'package:zoomeye/examples/distance_tracking_page.dart';
 import 'package:zoomeye/examples/earth_page.dart';
 import 'package:zoomeye/examples/face_detection_page.dart';
@@ -18,6 +21,8 @@ import 'package:zoomeye/examples/manipulation_page.dart';
 import 'package:zoomeye/examples/measure_page.dart';
 import 'package:zoomeye/examples/midas_page.dart';
 import 'package:zoomeye/examples/network_image_detection.dart';
+import 'package:zoomeye/examples/nlp/language_identifier_view.dart';
+import 'package:zoomeye/examples/nlp/language_translator.dart';
 import 'package:zoomeye/examples/occlusion_page.dart';
 import 'package:zoomeye/examples/panorama_page.dart';
 import 'package:zoomeye/examples/physics_page.dart';
@@ -95,6 +100,36 @@ class ExampleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final examples = [
+      Example(
+          '[D] Object Detector',
+          'Detector Object in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ObjectDetectorView()))),
+      Example(
+          '[D] Text Detector',
+          'Detector Text in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => TextRecognizerView()))),
+      Example(
+          '[NLP] Language Identifier',
+          'Langeauge Indentifier in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LanguageIdentifierView()))),
+      Example(
+          '[NLP] Language Translator',
+          'Language Translator in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LanguageTranslatorView()))),
+      Example(
+          '[NLP] Entity Extractor',
+          'Entity Extractor in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LanguageTranslatorView()))),
+      Example(
+          '[NLP] Smart reply',
+          'Smart Reply in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LanguageTranslatorView()))),
       Example(
           'Hello',
           'Visualize Ball',

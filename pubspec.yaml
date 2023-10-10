@@ -40,6 +40,10 @@ dependencies:
   google_ml_kit: ^0.16.2
   arkit_plugin: ^1.0.6
 
+  image_picker: ^1.0.1
+  path: ^1.8.3
+  path_provider: ^2.0.15
+
   # Firebase dependencies to shared and manage cloud anchor IDs and related content
   # cloud_firestore: "4.9.3"
   # geoflutterfire2: "2.3.15"
