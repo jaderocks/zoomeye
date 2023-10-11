@@ -19,6 +19,7 @@ TODOS
 [ ] Integrate ARKit with MLKit 
    https://medium.com/firebase-developers/see-how-ml-kit-and-arkit-play-together-54ba8136766e
    https://github.com/FirebaseExtended/MLKit-ARKit/tree/master
+   https://developer.apple.com/documentation/arkit/arkit_in_ios/content_anchors/recognizing_and_labeling_arbitrary_objects
  
 ### Learn 
 
