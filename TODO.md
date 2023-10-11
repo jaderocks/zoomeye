@@ -8,6 +8,13 @@ TODOS
 ### Routines
 1. How to find the text object in the scene?
    1. Maunally let user to slice an rectangle area (https://github.com/mludowise/ARKitRectangleDetection)
+
+   Ans: 
+   1. Capture ARKit scene to screenshot in realtime
+   2. Use MLKit to recognize text with the screenshot
+   3. Use ARKit Scene to add text node nearby original text
+   4. Add interaction with the text node to show detail results
+
 2. How to extract the text from image? [v]
    1. CoreML from apple??
    2. Google ML Toolkits??
