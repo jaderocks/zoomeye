@@ -16,7 +16,9 @@ TODOS
 5. How to add animation when add the information?
 
 ### Tasks
-[ ] Integrate ARKit with MLKit
+[ ] Integrate ARKit with MLKit 
+   https://medium.com/firebase-developers/see-how-ml-kit-and-arkit-play-together-54ba8136766e
+   https://github.com/FirebaseExtended/MLKit-ARKit/tree/master
  
 ### Learn 
 
