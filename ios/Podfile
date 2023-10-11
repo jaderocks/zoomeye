@@ -2,6 +2,9 @@
 platform :ios, '13.0'
 source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
+# Add language package you need to use
+pod 'GoogleMLKit/TextRecognitionChinese', '~> 4.0.0'
+
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
