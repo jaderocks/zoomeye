@@ -31,6 +31,7 @@ import 'package:zoomeye/examples/detector/object_detector.dart';
 import 'package:zoomeye/examples/detector/text_detector.dart';
 import 'package:zoomeye/examples/nlp/language_identifier_view.dart';
 import 'package:zoomeye/examples/nlp/language_translator.dart';
+import 'package:zoomeye/screen/food.dart';
 
 void main() {
   // runApp(const MyApp());
@@ -98,6 +99,11 @@ class ExampleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final examples = [
+      Example(
+          'Food Detector',
+          'Detector Food in the camera',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => FoodDetectionPage()))),
       Example(
           '[D] Object Detector',
           'Detector Object in the camera',
