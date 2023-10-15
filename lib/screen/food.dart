@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 class FoodDetectionPage extends StatefulWidget {
@@ -43,6 +45,34 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
     }
   }
 
+  Future<InputImage> saveMemImageToInputImage(MemoryImage image, String fileName) async {
+    final dir = await getExternalStorageDirectory(); 
+    final myImagePath = dir!.path + fileName; 
+    File imageFile = File(myImagePath); 
+    if(!await imageFile.exists()){   
+      imageFile.create(recursive: true); 
+    } 
+
+    await imageFile.writeAsBytes(image.bytes);
+
+    return InputImage.fromFilePath(myImagePath);
+  }
+
+  Future<InputImage> convertMemImageToInputImage(MemoryImage arImage) async {
+    final img = await decodeImageFromList(arImage.bytes);
+
+    return InputImage.fromBytes(
+      bytes: arImage.bytes,
+      metadata: InputImageMetadata(
+        size: Size(img.width.toDouble(), img.height.toDouble()),
+        rotation:
+            InputImageRotation.rotation0deg, // used only in Android
+        format: InputImageFormat.bgra8888, // used only in iOS
+        bytesPerRow: img.width, // used only in iOS
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Image Detection Sample')),
@@ -60,20 +90,7 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
 
             _text = 'Image got...';
 
-            final img = await decodeImageFromList(arImage.bytes);
-
-            print(_text);
-
-            final iImage = InputImage.fromBytes(
-              bytes: arImage.bytes,
-              metadata: InputImageMetadata(
-                size: Size(img.width.toDouble(), img.height.toDouble()),
-                rotation:
-                    InputImageRotation.rotation0deg, // used only in Android
-                format: InputImageFormat.bgra8888, // used only in iOS
-                bytesPerRow: img.width, // used only in iOS
-              ),
-            );
+            InputImage iImage = await saveMemImageToInputImage(arImage, "snapshot.jpg");
 
             _text = 'Start to detect text in image...';
             print(_text);
