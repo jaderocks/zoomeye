@@ -46,15 +46,21 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
   }
 
   Future<InputImage> saveMemImageToInputImage(MemoryImage image, String fileName) async {
-    final dir = await getExternalStorageDirectory(); 
+    Directory? dir = Platform.isAndroid
+        ? await getExternalStorageDirectory() //FOR ANDROID
+        : await getApplicationSupportDirectory(); //FOR iOS
     final myImagePath = dir!.path + fileName; 
     File imageFile = File(myImagePath); 
     if(!await imageFile.exists()){   
       imageFile.create(recursive: true); 
     } 
 
-    await imageFile.writeAsBytes(image.bytes);
+    print("Start to save image: ${myImagePath}");
 
+    await imageFile.writeAsBytes(image.bytes);
+  
+    print("saved: ${myImagePath}");
+    
     return InputImage.fromFilePath(myImagePath);
   }
 
