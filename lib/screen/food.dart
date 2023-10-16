@@ -23,6 +23,7 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
   bool _canProcess = true;
   bool _isBusy = false;
   String _text = '';
+  String _recognizedText = '';
 
   @override
   void dispose() {
@@ -49,7 +50,7 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
     Directory? dir = Platform.isAndroid
         ? await getExternalStorageDirectory() //FOR ANDROID
         : await getApplicationSupportDirectory(); //FOR iOS
-    final myImagePath = dir!.path + fileName; 
+    final myImagePath = "${dir!.path}/$fileName"; 
     File imageFile = File(myImagePath); 
     if(!await imageFile.exists()){   
       imageFile.create(recursive: true); 
@@ -79,47 +80,52 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
     );
   }
 
+  Future<void> processCurrentScene() async {
+      if (!_canProcess) return;
+      if (_isBusy) return;
+      _isBusy = true;
+
+      final arImage = (await arkitController.snapshot()) as MemoryImage;
+
+      InputImage iImage = await saveMemImageToInputImage(arImage, "snapshot.jpg");
+
+      final recognizedText = (await _textRecognizer.processImage(iImage)).text;
+      
+      if(_recognizedText != recognizedText) {
+        _recognizedText = recognizedText;
+        _text = 'Recognized text:\n\n$_recognizedText';
+      }
+ 
+      _isBusy = false;
+
+      if (mounted) {
+        setState(() {});
+      }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Image Detection Sample')),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.camera),
           onPressed: () async {
-            if (!_canProcess) return;
-            if (_isBusy) return;
-            _isBusy = true;
-            setState(() {
-              _text = 'Start 1..';
-            });
-
-            final arImage = (await arkitController.snapshot()) as MemoryImage;
-
-            _text = 'Image got...';
-
-            InputImage iImage = await saveMemImageToInputImage(arImage, "snapshot.jpg");
-
-            _text = 'Start to detect text in image...';
-            print(_text);
-
-            final recognizedText = await _textRecognizer.processImage(iImage);
-
-            _text = 'Recognized text:\n\n${recognizedText.text}';
-            _isBusy = false;
-
-            if (mounted) {
-              setState(() {});
-            }
+            processCurrentScene();
           },
         ),
         body: Container(
           child: Stack(
-            fit: StackFit.expand,
+            fit: StackFit.loose,
             children: [
               ARKitSceneView(
                 detectionImagesGroupName: 'AR Resources',
                 onARKitViewCreated: onARKitViewCreated,
               ),
-              Text(_text),
+              Container(
+                width: MediaQuery.of(context).size.width, 
+                height: 200.00,
+                color: const Color.fromRGBO(255, 255, 255, 0.3),
+                padding: const EdgeInsets.all(10.0),
+                child: Text(_text),),
               anchorWasFound
                   ? Container()
                   : Padding(
@@ -168,6 +174,9 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
   void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
     this.arkitController.onAddNodeForAnchor = onAnchorWasFound;
+    this.arkitController.updateAtTime = (double time) => {
+      processCurrentScene()
+    };
   }
 
   void onAnchorWasFound(ARKitAnchor anchor) {
