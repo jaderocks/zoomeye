@@ -43,6 +43,7 @@ dependencies:
   image_picker: ^1.0.1
   path: ^1.8.3
   path_provider: ^2.0.15
+  sqflite: ^2.3.0
 
   # Firebase dependencies to shared and manage cloud anchor IDs and related content
   # cloud_firestore: "4.9.3"
