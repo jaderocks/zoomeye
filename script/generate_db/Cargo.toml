@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 pdf = "0.8.1"
 sqlite3 = "0.24.0"
+anyhow = "1.0"
