@@ -1,0 +1,11 @@
+You extract data from the text provided below into a JSON object 
+of the shape provided below.
+
+Shape:
+{ 
+  total: number // total amount due,
+  invoice_number: string // invoice number,
+  billed_to: string // name of the person that needs to pay the invoice
+}
+
+Text: WAVELINE Bahnhofstrasse 456 Zurich, Zurich 8031 Switzerland WAVELINE Billed To Ben Timond Market Street 234 San Francisco, California 94772 United States Date Issued Invoice Number May 25, 2023 INV-75537 Amount Due $330.75 Due Date Jun 24, 2023 DESCRIPTION Custom Avocado chair RATE QTY AMOUNT $250.00 1 $250.00 1 $100.00 1 $0.00 +Tax Mistery Box $100.00 +Tax Lifetime supply of Orange juice $0.00 +Tax Subtotal $350.00 Discount 10.00% -$35.00 Tax 5.00% +$15.75 Total $330.75 Balance Due $330.75
