@@ -74,6 +74,7 @@ class safelist(list):
         
 def insert_additive_data(db: sqlite3.Connection) -> None:
     cursor = db.cursor()
+    cursor.execute("DELETE from additive")
 
     # 创建一个 SQL 语句
     sql = "INSERT INTO additive (id, name, serial_no, category, max, note) VALUES (?, ?, ?, ?, ?, ?)"
