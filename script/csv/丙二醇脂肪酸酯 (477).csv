@@ -1,0 +1,33 @@
+
+"Number","Food Category","Max Level","Units","Notes"
+"01.1.4","Flavoured fluid milk drinks","5,000","mg/kg",""
+"01.3.2","Beverage whiteners","1,000","mg/kg","XS250  XS252"
+"01.4.4","Cream analogues","5,000","mg/kg","86"
+"01.5.2","Milk and cream powder analogues","100,000","mg/kg","XS251"
+"01.7","Dairy-based desserts (e.g. pudding, fruit or flavoured yoghurt)","5,000","mg/kg",""
+"02.1.2","Vegetable oils and fats","10,000","mg/kg","XS19  XS210  XS33"
+"02.1.3","Lard, tallow, fish oil, and other animal fats","10,000","mg/kg","XS19  XS211"
+"02.2.2","Fat spreads, dairy fat spreads and blended spreads","20,000","mg/kg",""
+"02.3","Fat emulsions mainly of type oil-in-water, including mixed and/or flavoured products based on fat emulsions","30,000","mg/kg",""
+"02.4","Fat-based desserts excluding dairy-based dessert products of food category 01.7","40,000","mg/kg",""
+"03.0","Edible ices, including sherbet and sorbet","5,000","mg/kg",""
+"04.1.2.8","Fruit preparations, including pulp, purees, fruit toppings and coconut milk","40,000","mg/kg",""
+"04.1.2.9","Fruit-based desserts, including fruit-flavoured water-based desserts","40,000","mg/kg",""
+"04.1.2.11","Fruit fillings for pastries","40,000","mg/kg",""
+"04.2.2.6","Vegetable (including mushrooms and fungi, roots and tubers, pulses and legumes, and aloe vera), seaweed, and nut and seed pulps and preparations (e.g. vegetable desserts and sauces, candied vegetables) other than food category 04.2.2.5","5,000","mg/kg",""
+"05.1.1","Cocoa mixes (powders) and cocoa mass/cake","5,000","mg/kg","XS141  97"
+"05.2","Confectionery including hard and soft candy, nougats, etc. other than food categories 05.1, 05.3 and 05.4","5,000","mg/kg","XS309R"
+"05.3","Chewing gum","20,000","mg/kg",""
+"05.4","Decorations (e.g. for fine bakery wares), toppings (non-fruit) and sweet sauces","40,000","mg/kg",""
+"06.4.3","Pre-cooked pastas and noodles and like products","5,000","mg/kg","153  2"
+"06.5","Cereal and starch based desserts (e.g. rice pudding, tapioca pudding)","40,000","mg/kg",""
+"07.0","Bakery wares","15,000","mg/kg","11  72"
+"10.4","Egg-based desserts (e.g. custard)","40,000","mg/kg",""
+"11.4","Other sugars and syrups (e.g. xylose, maple syrup, sugar toppings)","5,000","mg/kg",""
+"13.3","Dietetic foods intended for special medical purposes (excluding products of food category 13.1)","5,000","mg/kg",""
+"13.4","Dietetic formulae for slimming purposes and weight reduction","5,000","mg/kg",""
+"14.1.4","Water-based flavoured drinks, including ""sport,"" ""energy,"" or ""electrolyte"" drinks and particulated drinks","500","mg/kg",""
+
+
+(c) FAO and WHO 2009
+

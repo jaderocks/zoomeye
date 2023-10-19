@@ -1,0 +1,25 @@
+
+"Number","Food Category","Max Level","Units","Notes"
+"01.4.3","Clotted cream (plain)","10","mg/kg",""
+"01.6.1","Unripened cheese","12","mg/kg","233"
+"01.6.2","Ripened cheese","12","mg/kg","233  XS277  XS276  XS208  XS274  XS278"
+"01.6.4","Processed cheese","12","mg/kg","233"
+"01.6.5","Cheese analogues","12","mg/kg",""
+"01.6.6","Whey protein cheese","12","mg/kg",""
+"01.7","Dairy-based desserts (e.g. pudding, fruit or flavoured yoghurt)","12","mg/kg","233  362"
+"06.5","Cereal and starch based desserts (e.g. rice pudding, tapioca pudding)","3","mg/kg",""
+"07.2","Fine bakery wares (sweet, salty, savoury) and mixes","6","mg/kg","233"
+"10.2.1","Liquid egg products","6","mg/kg","233"
+"12.5.1","Ready-to-eat soups and broths, including canned, bottled, and frozen","5","mg/kg","233  339"
+"01.1.4","Flavoured fluid milk drinks","12","mg/kg","233  403"
+"08.2.2","Heat-treated processed meat, poultry, and game products in whole pieces or cuts","25","mg/kg","233  330  XS96  XS97"
+"08.3.2","Heat-treated processed comminuted meat, poultry, and game products","25","mg/kg","233  377"
+"08.4","Edible casings (e.g. sausage casings)","7","mg/kg","233"
+"12.6.1","Emulsified sauces and dips (e.g. mayonnaise, salad dressing, onion dip)","5","mg/kg","233  538"
+"12.6.2","Non-emulsified sauces (e.g. ketchup, cheese sauce, cream sauce, brown gravy)","5","mg/kg","233  XS306R  538"
+"12.6.4","Clear sauces (e.g. fish sauce)","5","mg/kg","233  XS302  538"
+"12.7","Salads (e.g. macaroni salad, potato salad) and sandwich spreads excluding cocoa- and nut-based spreads of food categories 04.2.2.5 and 05.1.3","5","mg/kg","233  538"
+
+
+(c) FAO and WHO 2009
+
