@@ -73,8 +73,10 @@ class safelist(list):
             return default
         
 def insert_additive_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+
     # 创建一个 SQL 语句
-    sql = "INSERT INTO additive (id, name, serial_no, category, max, note) VALUES (?, ?, ?)"
+    sql = "INSERT INTO additive (id, name, serial_no, category, max, note) VALUES (?, ?, ?, ?, ?, ?)"
     
     tables: list[Additive] = []
 
@@ -93,15 +95,17 @@ def insert_additive_data(db: sqlite3.Connection) -> None:
                         continue
                     ensure_row = safelist(row)
                     tables.append(Additive(
-                        uuid.uuid4(), add_name, ensure_row.get(0), ensure_row.get(1),  ensure_row.get(2),  ensure_row.get(3)
+                        str(uuid.uuid4()), add_name, ensure_row.get(0), ensure_row.get(1),  ensure_row.get(2),  ensure_row.get(3)
                     ))
-    # # 遍历表格数据
-    # for table in tables:
-    #     # 创建一个绑定参数列表
-    #     bindings = [table.id, table.name, table.serial_no, table.category, table.max, table.note]
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        bindings = [table.id, table.name, table.serial_no, table.category, table.max, table.note]
 
-    #     # 执行 SQL 语句
-    #     db.execute(sql, bindings)
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
 
 def updateCN():
       # # 创建 SQLite 数据库
@@ -109,6 +113,8 @@ def updateCN():
 
     # # 将表格数据插入到 SQLite 数据库中
     insert_additive_data(db)
+    
+    db.commit()
 
     # # 关闭 SQLite 数据库
     db.close()
