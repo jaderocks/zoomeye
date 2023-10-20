@@ -30,10 +30,10 @@ CREATE TABLE "additive" (
 );
 
 -- ----------------------------
--- Table structure for eazyme
+-- Table structure for enzyme
 -- ----------------------------
-DROP TABLE IF EXISTS "eazyme";
-CREATE TABLE "eazyme" (
+DROP TABLE IF EXISTS "enzyme";
+CREATE TABLE "enzyme" (
   "id" text NOT NULL,
   "cn_name" TEXT,
   "en_name" TEXT,

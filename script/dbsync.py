@@ -1,8 +1,10 @@
 
 import csv
+from enum import Enum
 import os
 import re
 import sqlite3
+from typing import Union
 import uuid
 
 
@@ -71,19 +73,28 @@ class safelist(list):
             return self.__getitem__(index)
         except IndexError:
             return default
-        
-def insert_additive_data(db: sqlite3.Connection) -> None:
-    cursor = db.cursor()
-    cursor.execute("DELETE from additive")
 
-    # 创建一个 SQL 语句
-    sql = "INSERT INTO additive (id, name, serial_no, category, max, note) VALUES (?, ?, ?, ?, ?, ?)"
-    
-    tables: list[Additive] = []
+
+class FOOD(Enum):
+    ADDI = 1
+    ENZYME = 2
+    PROCESSING = 3
+    SPICES = 4
+
+def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Eazyme, Processing, Spices]]:
+    tables: list = []
+
+    if type == FOOD.ADDI:
+        root_dir = 'csv/additive/cn'  
+    elif type == FOOD.ENZYME:
+        root_dir = 'csv/enzyme'  
+    elif type == FOOD.PROCESSING:
+        root_dir = 'csv/process'  
+    else:
+        root_dir = 'csv/spices'  
 
     # read additive data from csv files inside additive folder  
-    rootdir = 'csv/additive/cn'
-    for subdir, dirs, files in os.walk(rootdir):
+    for subdir, dirs, files in os.walk(root_dir):
         for file in files:
             curr = os.path.join(subdir, file)
             add_name = re.sub(r'([^\(|\)]+)\(.*\)', r'\1', file).replace('.csv', '')
@@ -95,13 +106,95 @@ def insert_additive_data(db: sqlite3.Connection) -> None:
                     if idx == 0:
                         continue
                     ensure_row = safelist(row)
-                    tables.append(Additive(
-                        str(uuid.uuid4()), add_name, ensure_row.get(0), ensure_row.get(1),  ensure_row.get(2),  ensure_row.get(3)
-                    ))
+
+                    if type == FOOD.ADDI:
+                        item = Additive(
+                            str(uuid.uuid4()), add_name, ensure_row.get(0), ensure_row.get(1),  ensure_row.get(2),  ensure_row.get(3)
+                        )
+                    elif type == FOOD.ENZYME:
+                        item = Eazyme(
+                            str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1),  
+                            ensure_row.get(2),  ensure_row.get(3), ensure_row.get(4)
+                        )
+                    elif type == FOOD.PROCESSING:
+                        item = Processing(
+                            str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1),  
+                            ensure_row.get(2),  ensure_row.get(3)
+                        )
+                    else:
+                        item = Spices(
+                            str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1)
+                        )
+
+                    tables.append(item)
+    return tables
+
+def insert_additive_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from additive")
+
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO additive (id, name, serial_no, category, max, note) VALUES (?, ?, ?, ?, ?, ?)"
+    tables: list[Additive] = prepare_data(FOOD.ADDI)
+
     # 遍历表格数据
     for table in tables:
         # 创建一个绑定参数列表
         bindings = [table.id, table.name, table.serial_no, table.category, table.max, table.note]
+
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
+
+def insert_enzyme_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from enzyme")
+
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO enzyme (id, cn_name, en_name, source, donor, note) VALUES (?, ?, ?, ?, ?, ?)"
+    tables: list[Eazyme] = prepare_data(FOOD.ENZYME)
+
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        bindings = [table.id, table.cn_name, table.en_name, table.source, table.donor, table.note]
+
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
+
+def insert_processing_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from processing")
+
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO processing (id, cn_name, en_name, function, scope) VALUES (?, ?, ?, ?, ?)"
+    tables: list[Processing] = prepare_data(FOOD.PROCESSING)
+
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        bindings = [table.id, table.cn_name, table.en_name, table.function, table.scope]
+
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
+
+def insert_spices_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from spices")
+
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO spices (id, type, name) VALUES (?, ?, ?)"
+    tables: list[Spices] = prepare_data(FOOD.SPICES)
+
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        bindings = [table.id, table.type, table.name]
 
         print(bindings)
 
@@ -114,6 +207,9 @@ def updateCN():
 
     # # 将表格数据插入到 SQLite 数据库中
     insert_additive_data(db)
+    insert_enzyme_data(db)
+    insert_processing_data(db)
+    insert_spices_data(db)
     
     db.commit()
 
