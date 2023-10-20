@@ -27,6 +27,7 @@ import 'package:zoomeye/examples/ar/tap_page.dart';
 import 'package:zoomeye/examples/ar/video_page.dart';
 import 'package:zoomeye/examples/ar/widget_projection.dart';
 import 'package:zoomeye/examples/ar/world.dart';
+import 'package:zoomeye/examples/db_view/additive_list.dart';
 import 'package:zoomeye/examples/detector/object_detector.dart';
 import 'package:zoomeye/examples/detector/text_detector.dart';
 import 'package:zoomeye/examples/nlp/language_identifier_view.dart';
@@ -99,6 +100,11 @@ class ExampleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final examples = [
+      Example(
+          'Food DB View',
+          'Food List View and Query',
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdditiveList()))),
       Example(
           'Food Detector',
           'Detector Food in the camera',

@@ -25,7 +25,7 @@ class Additive:
         self.note = note
 
 
-class Eazyme:
+class Enzyme:
     id: int
     cn_name: str
     en_name: str
@@ -81,7 +81,7 @@ class FOOD(Enum):
     PROCESSING = 3
     SPICES = 4
 
-def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Eazyme, Processing, Spices]]:
+def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Enzyme, Processing, Spices]]:
     tables: list = []
 
     if type == FOOD.ADDI:
@@ -112,7 +112,7 @@ def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Eazyme, Processing, Spi
                             str(uuid.uuid4()), add_name, ensure_row.get(0), ensure_row.get(1),  ensure_row.get(2),  ensure_row.get(3)
                         )
                     elif type == FOOD.ENZYME:
-                        item = Eazyme(
+                        item = Enzyme(
                             str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1),  
                             ensure_row.get(2),  ensure_row.get(3), ensure_row.get(4)
                         )
@@ -153,7 +153,7 @@ def insert_enzyme_data(db: sqlite3.Connection) -> None:
 
     # 创建一个 SQL 语句
     sql = "INSERT INTO enzyme (id, cn_name, en_name, source, donor, note) VALUES (?, ?, ?, ?, ?, ?)"
-    tables: list[Eazyme] = prepare_data(FOOD.ENZYME)
+    tables: list[Enzyme] = prepare_data(FOOD.ENZYME)
 
     # 遍历表格数据
     for table in tables:
