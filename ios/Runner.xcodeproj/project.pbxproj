@@ -655,7 +655,6 @@
 					"\"nanopb\"",
 					"-framework",
 					"\"path_provider_foundation\"",
-					"-ld64",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglabs.zoomeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -978,7 +977,6 @@
 					"\"nanopb\"",
 					"-framework",
 					"\"path_provider_foundation\"",
-					"-ld64",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglabs.zoomeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1145,7 +1143,6 @@
 					"\"nanopb\"",
 					"-framework",
 					"\"path_provider_foundation\"",
-					"-ld64",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglabs.zoomeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
