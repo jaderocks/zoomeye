@@ -1,11 +1,11 @@
 
 import csv
-from enum import Enum
 import os
 import re
 import sqlite3
-from typing import Union
 import uuid
+from enum import Enum
+from typing import Union
 
 
 class Additive:
@@ -67,6 +67,46 @@ class Spices:  # 香料
         self.type = type
         self.name = name
 
+class Category: 
+    id: int
+    name: str
+    desc: str
+    additives: str
+    
+    def __init__(self, id: int, name:str, desc:str, additives:str):
+        self.id = id
+        self.name = name
+        self.desc = desc
+        self.additives = additives
+
+class Disease: 
+    # 添加剂名称,危害,危害程度,危害来源
+    id: int
+    name: str
+    harm: str
+    level: str
+    source: str
+    
+    def __init__(self, id: int, name:str, harm:str, level:str, source:str):
+        self.id = id
+        self.name = name
+        self.harm = harm
+        self.level = level
+        self.source = source
+
+class Forbid: 
+    # 序号,名称,可能添加的食品品种,检测方法
+    id: int
+    name: str
+    food: str
+    check_method: str
+    
+    def __init__(self, id: int, name:str, food:str, check_method:str):
+        self.id = id
+        self.name = name
+        self.food = food
+        self.check_method = check_method
+
 class safelist(list):
     def get(self, index, default=''):
         try:
@@ -80,6 +120,9 @@ class FOOD(Enum):
     ENZYME = 2
     PROCESSING = 3
     SPICES = 4
+    CATEGORY = 5
+    DISEASE = 6
+    FORBID = 7
 
 def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Enzyme, Processing, Spices]]:
     tables: list = []
@@ -90,8 +133,14 @@ def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Enzyme, Processing, Spi
         root_dir = 'csv/enzyme'  
     elif type == FOOD.PROCESSING:
         root_dir = 'csv/process'  
-    else:
+    elif type == FOOD.SPICES:
         root_dir = 'csv/spices'  
+    elif type == FOOD.CATEGORY:
+        root_dir = 'csv/category'  
+    elif type == FOOD.DISEASE:
+        root_dir = 'csv/disease'  
+    elif type == FOOD.FORBID:
+        root_dir = 'csv/forbid'  
 
     # read additive data from csv files inside additive folder  
     for subdir, dirs, files in os.walk(root_dir):
@@ -121,9 +170,21 @@ def prepare_data(type=FOOD.ADDI) -> list[Union[Additive, Enzyme, Processing, Spi
                             str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1),  
                             ensure_row.get(2),  ensure_row.get(3)
                         )
-                    else:
+                    elif type == FOOD.SPICES:
                         item = Spices(
                             str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1)
+                        )
+                    elif type == FOOD.CATEGORY:
+                        item = Category(
+                            str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1), ensure_row.get(2)
+                        )
+                    elif type == FOOD.DISEASE:
+                         item = Disease(
+                            str(uuid.uuid4()), ensure_row.get(0), ensure_row.get(1), ensure_row.get(2), ensure_row.get(3)
+                        )
+                    elif type == FOOD.FORBID:
+                        item = Forbid(
+                            ensure_row.get(0), ensure_row.get(1), ensure_row.get(2), ensure_row.get(3)
                         )
 
                     tables.append(item)
@@ -170,7 +231,7 @@ def insert_processing_data(db: sqlite3.Connection) -> None:
     cursor.execute("DELETE from processing")
 
     # 创建一个 SQL 语句
-    sql = "INSERT INTO processing (id, cn_name, en_name, function, scope) VALUES (?, ?, ?, ?, ?)"
+    sql = "INSERT INTO processing (id, cn_name, en_name, 'function', scope) VALUES (?, ?, ?, ?, ?)"
     tables: list[Processing] = prepare_data(FOOD.PROCESSING)
 
     # 遍历表格数据
@@ -201,6 +262,74 @@ def insert_spices_data(db: sqlite3.Connection) -> None:
         # 执行 SQL 语句
         cursor.execute(sql, bindings)
 
+def insert_forbid_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from forbid")
+
+#   id: int
+    # name: str
+    # food: str
+    # check_method: str
+
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO forbid (id, name, food, check_method) VALUES (?, ?, ?, ?)"
+    tables: list[Forbid] = prepare_data(FOOD.FORBID)
+
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        bindings = [table.id, table.name, table.food, table.check_method]
+
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
+
+def insert_disease_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from disease")
+
+#   id: int
+#     name: str
+#     harm: str
+#     level: str
+#     source: str
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO disease (id, name, harm, level, source) VALUES (?, ?, ?, ?, ?)"
+    tables: list[Disease] = prepare_data(FOOD.DISEASE)
+
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        bindings = [table.id, table.name, table.harm, table.level, table.source]
+
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
+
+def insert_category_data(db: sqlite3.Connection) -> None:
+    cursor = db.cursor()
+    cursor.execute("DELETE from category")
+
+    # 创建一个 SQL 语句
+    sql = "INSERT INTO category (id,name,'desc',additives) VALUES (?,?,?,json(?))"
+    tables: list[Category] = prepare_data(FOOD.CATEGORY)
+
+    # query: 
+    # select category.* from category, json_each(category.additives) where json_each.value = 4
+
+    # 遍历表格数据
+    for table in tables:
+        # 创建一个绑定参数列表
+        additives = (table.additives or '').split('、')
+        bindings = [table.id, table.name, table.desc, str(additives).replace("'",'"')]
+
+        print(bindings)
+
+        # 执行 SQL 语句
+        cursor.execute(sql, bindings)
+
 def updateCN():
       # # 创建 SQLite 数据库
     db = sqlite3.connect("food_cn.db")
@@ -210,6 +339,9 @@ def updateCN():
     insert_enzyme_data(db)
     insert_processing_data(db)
     insert_spices_data(db)
+    insert_category_data(db)
+    insert_disease_data(db)
+    insert_forbid_data(db)
     
     db.commit()
 

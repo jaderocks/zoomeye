@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:sqfentity/sqfentity.dart';
 import 'package:sqfentity_gen/sqfentity_gen.dart';
+
 import '../util/db_helper.dart';
 import 'view.list.dart';
 
@@ -86,6 +86,58 @@ const tableSpices = SqfEntityTable(
     ],
     formListSubTitleField: '');
 
+const tableCategory = SqfEntityTable(
+    tableName: 'category',
+    primaryKeyName: 'id',
+    primaryKeyType: PrimaryKeyType.text,
+    // primaryKeyType: PrimaryKeyType.integer_auto_incremental,
+    useSoftDeleting: true,
+    // when useSoftDeleting is true, creates a field named 'isDeleted' on the table, and set to '1' this field when item deleted (does not hard delete)
+    modelName:
+        null, // SqfEntity will set it to TableName automatically when the modelName (class name) is null
+    // declare fields
+    fields: [
+      SqfEntityField('desc', DbType.text),
+      SqfEntityField('name', DbType.text),
+      SqfEntityField('additives', DbType.text),
+    ],
+    formListSubTitleField: '');
+
+const tableDisease = SqfEntityTable(
+    tableName: 'disease',
+    primaryKeyName: 'id',
+    primaryKeyType: PrimaryKeyType.text,
+    // primaryKeyType: PrimaryKeyType.integer_auto_incremental,
+    useSoftDeleting: true,
+    // when useSoftDeleting is true, creates a field named 'isDeleted' on the table, and set to '1' this field when item deleted (does not hard delete)
+    modelName:
+        null, // SqfEntity will set it to TableName automatically when the modelName (class name) is null
+    // declare fields
+    fields: [
+      SqfEntityField('harm', DbType.text),
+      SqfEntityField('name', DbType.text),
+      SqfEntityField('level', DbType.text),
+      SqfEntityField('source', DbType.text),
+    ],
+    formListSubTitleField: '');
+
+const tableForbid = SqfEntityTable(
+    tableName: 'forbid',
+    primaryKeyName: 'id',
+    primaryKeyType: PrimaryKeyType.text,
+    // primaryKeyType: PrimaryKeyType.integer_auto_incremental,
+    useSoftDeleting: true,
+    // when useSoftDeleting is true, creates a field named 'isDeleted' on the table, and set to '1' this field when item deleted (does not hard delete)
+    modelName:
+        null, // SqfEntity will set it to TableName automatically when the modelName (class name) is null
+    // declare fields
+    fields: [
+      SqfEntityField('name', DbType.text),
+      SqfEntityField('food', DbType.text),
+      SqfEntityField('check_method', DbType.text),
+    ],
+    formListSubTitleField: '');
+
 // Define the 'identity' constant as SqfEntitySequence.
 const seqIdentity = SqfEntitySequence(
   sequenceName: 'identity',
@@ -108,7 +160,15 @@ const foodModel = SqfEntityModel(
     password:
         null, // You can set a password if you want to use crypted database (For more information: https://github.com/sqlcipher/sqlcipher)
     // put defined tables into the tables list.
-    databaseTables: [tableAdditive, tableEnzyme, tableProcessing, tableSpices],
+    databaseTables: [
+      tableAdditive,
+      tableEnzyme,
+      tableProcessing,
+      tableSpices,
+      tableCategory,
+      tableDisease,
+      tableForbid
+    ],
     // You can define tables to generate add/edit view forms if you want to use Form Generator property
     formTables: [tableAdditive],
     // put defined sequences into the sequences list.

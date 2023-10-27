@@ -10,7 +10,7 @@
  Target Server Version : 3035005 (3.35.5)
  File Encoding         : 65001
 
- Date: 19/10/2023 23:29:39
+ Date: 26/10/2023 00:02:50
 */
 
 PRAGMA foreign_keys = false;
@@ -30,6 +30,31 @@ CREATE TABLE "additive" (
 );
 
 -- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS "category";
+CREATE TABLE "category" (
+  "id" text NOT NULL,
+  "name" text,
+  "desc" TEXT,
+  "additives" JSON,
+  PRIMARY KEY ("id")
+);
+
+-- ----------------------------
+-- Table structure for disease
+-- ----------------------------
+DROP TABLE IF EXISTS "disease";
+CREATE TABLE "disease" (
+  "id" text NOT NULL,
+  "name" TEXT,
+  "harm" TEXT,
+  "level" TEXT,
+  "source" TEXT,
+  PRIMARY KEY ("id")
+);
+
+-- ----------------------------
 -- Table structure for enzyme
 -- ----------------------------
 DROP TABLE IF EXISTS "enzyme";
@@ -40,6 +65,18 @@ CREATE TABLE "enzyme" (
   "source" TEXT,
   "donor" TEXT,
   "note" TEXT,
+  PRIMARY KEY ("id")
+);
+
+-- ----------------------------
+-- Table structure for forbid
+-- ----------------------------
+DROP TABLE IF EXISTS "forbid";
+CREATE TABLE "forbid" (
+  "id" text NOT NULL,
+  "name" TEXT,
+  "food" TEXT,
+  "check_method" TEXT,
   PRIMARY KEY ("id")
 );
 

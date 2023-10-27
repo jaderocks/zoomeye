@@ -37,3 +37,7 @@ TODOS
 * [ARKit + Vision: An intriguing combination by Jordan Osterberg](https://dev.to/osterbergjordan/arkit--vision-an-intriguing-combination)
     * Using Vision models to correlate them with realy objects in ARKit.
     * More information about horizontal planes & feature points in ARKit.
+
+
+### refs
+* [Food Additive info][http://db.foodmate.net/2760-2014//index.php?m=additives&a=category]
