@@ -1,11 +1,11 @@
 
 import csv
-from enum import Enum
 import os
 import re
 import sqlite3
-from typing import Union
 import uuid
+from enum import Enum
+from typing import Union
 
 
 class Additive:
@@ -71,13 +71,13 @@ class Category:
     id: int
     name: str
     desc: str
-    addtives: str
+    additives: str
     
     def __init__(self, id: int, name:str, desc:str, additives:str):
         self.id = id
         self.name = name
         self.desc = desc
-        self.addtives = additives
+        self.additives = additives
 
 class Disease: 
     # 添加剂名称,危害,危害程度,危害来源
@@ -322,7 +322,7 @@ def insert_category_data(db: sqlite3.Connection) -> None:
     # 遍历表格数据
     for table in tables:
         # 创建一个绑定参数列表
-        additives = (table.addtives or '').split('、')
+        additives = (table.additives or '').split('、')
         bindings = [table.id, table.name, table.desc, str(additives).replace("'",'"')]
 
         print(bindings)
