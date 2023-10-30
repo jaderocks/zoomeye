@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
+import 'package:zoomeye/util/extractor.dart';
 
 class FoodDetectionPage extends StatefulWidget {
   @override
@@ -92,7 +93,8 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
       final recognizedText = (await _textRecognizer.processImage(iImage)).text;
       
       if(_recognizedText != recognizedText) {
-        _recognizedText = recognizedText;
+      // TODO: extract chinese text and allowed chars
+      _recognizedText = extractChinese(recognizedText);
         _text = 'Recognized text:\n\n$_recognizedText';
       }
  
