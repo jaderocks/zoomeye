@@ -57,11 +57,11 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
       imageFile.create(recursive: true); 
     } 
 
-    print("Start to save image: ${myImagePath}");
+    // print("Start to save image: ${myImagePath}");
 
     await imageFile.writeAsBytes(image.bytes);
   
-    print("saved: ${myImagePath}");
+    // print("saved: ${myImagePath}");
     
     return InputImage.fromFilePath(myImagePath);
   }
@@ -94,7 +94,7 @@ class _FoodDetectionPageState extends State<FoodDetectionPage> {
       
       if(_recognizedText != recognizedText) {
       // TODO: extract chinese text and allowed chars
-      _recognizedText = extractChinese(recognizedText);
+      _recognizedText = await extractChinese(recognizedText);
         _text = 'Recognized text:\n\n$_recognizedText';
       }
  
